@@ -16,6 +16,9 @@ WORKDIR /app
 # Install routellm with serve and eval extras
 RUN pip install --no-cache-dir "routellm[serve,eval]"
 
+# Pre-download BERT model to avoid delay on first request
+RUN python -c "from routellm import Router; Router('bert', checkpoint_path='routellm/bert_gpt4_augmented')"
+
 # Create config directory
 RUN mkdir -p /app/config
 
