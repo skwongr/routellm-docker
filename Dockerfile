@@ -26,8 +26,12 @@ COPY config.yaml /app/config/config.yaml
 EXPOSE 6060
 
 # Default command with bert router
-# Override with docker run or docker-compose to customize models
-CMD ["python", "-m", "routellm.openai_server", \
-     "--routers", "bert", \
-     "--config", "/app/config/config.yaml", \
-     "--port", "6060"]
+# Environment variables can be passed via docker run -e
+CMD python -m routellm.openai_server \
+    --routers bert \
+    --config /app/config/config.yaml \
+    --port 6060 \
+    --strong-model ${STRONG_MODEL:-ollama_chat/llama3} \
+    --weak-model ${WEAK_MODEL:-ollama_chat/phi3} \
+    --base-url ${API_BASE:-http://host.docker.internal:11434/v1} \
+    --api-key ${API_KEY:-ollama}

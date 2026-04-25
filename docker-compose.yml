@@ -11,6 +11,8 @@ services:
     environment:
       - STRONG_MODEL=${STRONG_MODEL:-ollama_chat/llama3}
       - WEAK_MODEL=${WEAK_MODEL:-ollama_chat/phi3}
+      - API_BASE=${API_BASE:-http://host.docker.internal:11434/v1}
+      - API_KEY=${API_KEY:-ollama}
     env_file:
       - .env
     restart: unless-stopped
