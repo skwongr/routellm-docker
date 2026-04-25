@@ -51,6 +51,7 @@ curl -X POST http://localhost:6060/v1/chat/completions \
 | `WEAK_MODEL` | Model for simple queries | `ollama_chat/phi3` |
 | `API_BASE` | API endpoint for models | `http://host.docker.internal:11434/v1` |
 | `API_KEY` | API key for models | `ollama` |
+| `OPENAI_API_KEY` | Required by litellm (dummy OK) | `nokey` |
 
 ### Using External Providers
 
@@ -71,6 +72,18 @@ Use: `router-[ROUTER]-[THRESHOLD]`
 - `router-bert-0.3` - Low threshold → easier to route to **strong** model → more strong model calls
 - `router-bert-0.5` - Medium threshold → balanced
 - `router-bert-0.7` - High threshold → harder to route to strong → more **weak** model calls (cheaper)
+
+## Caching
+
+The `./cache` directory caches the BERT model between runs. On first build, it downloads ~400MB. Subsequent runs reuse the cache.
+
+To clear cache: `rm -rf ./cache`
+
+Or mount a custom volume if needed:
+```yaml
+volumes:
+  - my-cache:/root/.cache
+```
 
 ## Build
 
