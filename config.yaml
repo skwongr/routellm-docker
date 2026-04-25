@@ -1,0 +1,6 @@
+# RouteLLM Configuration for BERT Router
+# Uses BERT classifier - NO OpenAI API key needed for routing
+# Local models via Ollama for LLM calls
+
+bert:
+  checkpoint_path: routellm/bert_gpt4_augmented

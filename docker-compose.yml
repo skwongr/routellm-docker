@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  routellm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: routellm-server
+    ports:
+      - "6060:6060"
+    environment:
+      - STRONG_MODEL=${STRONG_MODEL:-ollama_chat/llama3}
+      - WEAK_MODEL=${WEAK_MODEL:-ollama_chat/phi3}
+    env_file:
+      - .env
+    restart: unless-stopped
