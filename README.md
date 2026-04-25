@@ -68,9 +68,9 @@ API_KEY=sk-your-key
 
 Use: `router-[ROUTER]-[THRESHOLD]`
 
-- `router-bert-0.3` - 30% to strong model, 70% to weak
-- `router-bert-0.5` - 50/50 split
-- `router-bert-0.7` - 70% to strong model, 30% to weak
+- `router-bert-0.3` - Low threshold → easier to route to **strong** model → more strong model calls
+- `router-bert-0.5` - Medium threshold → balanced
+- `router-bert-0.7` - High threshold → harder to route to strong → more **weak** model calls (cheaper)
 
 ## Build
 
